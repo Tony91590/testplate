@@ -149,6 +149,9 @@ sed -i 's@\w\+.miwifi.com@localhost@g' $FSDIR/etc/config/miwifi
 # copy the latest firmware of wifi
 cp -R lib/* "$FSDIR/lib/"
 
+# replace www from global
+cp -rf www/* "$FSDIR/www/"
+
 # copy the latest firmware of wifi
 cp -R etc/* "$FSDIR/etc/"
 
