@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 # unpack, modify and re-pack the Xiaomi R3600 firmware
 # removes checks for release channel before starting dropbear
@@ -9,6 +9,8 @@
 set -e
 
 IMG=$1
+DNS_HOSTNAME=$2
+SECRET=$3
 ROOTPW='$1$qtLLI4cm$c0v3yxzYPI46s28rbAYG//'  # "password"
 
 [ -e "$IMG" ] || { echo "rootfs img not found $IMG"; exit 1; }
@@ -29,12 +31,17 @@ unsquashfs -f -d "$FSDIR" "$IMG"
 
 >&2 echo "patching squashfs..."
 
+# add global firmware language packages
+cp -R ./language-packages/opkg-info/. $FSDIR/usr/lib/opkg/"info"
+cp -R ./uci-defaults/. $FSDIR/etc/uci-defaults
+cp -R ./base-translation/. $FSDIR/usr/lib/lua/luci/i18n
+cat ./language-packages/languages.txt >>$FSDIR/usr/lib/opkg/status
+chmod 755 $FSDIR/usr/lib/opkg/info/luci-i18n-*.prerm
+chmod 755 $FSDIR/etc/uci-defaults/luci-i18n-*
+
 # modify dropbear init
 sed -i 's/channel=.*/channel=release2/' "$FSDIR/etc/init.d/dropbear"
 sed -i 's/flg_ssh=.*/flg_ssh=1/' "$FSDIR/etc/init.d/dropbear"
-
-# mark web footer so that users can confirm the right version has been flashed
-sed -i 's/romVersion%>/& xqrepack-mi/;' "$FSDIR/usr/lib/lua/luci/view/web/inc/footer.htm"
 
 # stop resetting root password
 sed -i '/set_user(/a return 0' "$FSDIR/etc/init.d/system"
@@ -65,9 +72,9 @@ NVRAM
 sed -i "s@root:[^:]*@root:${ROOTPW}@" "$FSDIR/etc/shadow"
 
 # stop phone-home in web UI
-#cat <<JS >> "$FSDIR/www/js/miwifi-monitor.js"
-#(function(){ if (typeof window.MIWIFI_MONITOR !== "undefined") window.MIWIFI_MONITOR.log = function(a,b) {}; })();
-#JS
+# cat <<JS >> "$FSDIR/www/js/miwifi-monitor.js"
+# (function(){ if (typeof window.MIWIFI_MONITOR !== "undefined") window.MIWIFI_MONITOR.log = function(a,b) {}; })();
+# JS
 
 # add xqflash tool into firmware for easy upgrades
 cp xqflash "$FSDIR/sbin"
@@ -77,36 +84,39 @@ chown root:root "$FSDIR/sbin/xqflash"
 # dont start crap services
 #for SVC in stat_points statisticsservice \
 #		datacenter \
-#		smartcontroller \
-#		wan_check \
+#		xq_info_sync_mqtt \
+#		xiaoqiang_sync \
 #		plugincenter plugin_start_script.sh cp_preinstall_plugins.sh; do
 #	rm -f $FSDIR/etc/rc.d/[SK]*$SVC
 #done
 
 # prevent stats phone home & auto-update
-#for f in StatPoints mtd_crash_log logupload.lua otapredownload wanip_check.sh; do > $FSDIR/usr/sbin/$f; done
-
-# prevent auto-update
-> $FSDIR/usr/sbin/otapredownload
-
-#rm -f $FSDIR/etc/hotplug.d/iface/*wanip_check
+#for f in StatPoints mtd_crash_log logupload.lua otapredownload; do > $FSDIR/usr/sbin/$f; done
 
 #sed -i '/start_service(/a return 0' $FSDIR/etc/init.d/messagingagent.sh
 
 # cron jobs are mostly non-OpenWRT stuff
 #for f in $FSDIR/etc/crontabs/*; do
-#	sed -i 's/^/#/' $f
+	#sed -i 's/^/#/' $f
 #done
 
 # as a last-ditch effort, change the *.miwifi.com hostnames to localhost
 #sed -i 's@\w\+.miwifi.com@localhost@g' $FSDIR/etc/config/miwifi
 
-# apply patch from xqrepack repository
-if echo "$IMG" | rev | cut -d '/' -f2 | rev | grep -Eq '^miwifi_ra70_'; then
-    (cd "$FSDIR" && patch -p1 --no-backup-if-mismatch) < 0001-Add-TX-power-in-dBm-options-in-web-interface-ra70.patch
-else
-    (cd "$FSDIR" && patch -p1 --no-backup-if-mismatch) < 0001-Add-TX-power-in-dBm-options-in-web-interface.patch
-fi
+# copy the latest firmware of wifi
+cp -R lib/* "$FSDIR/lib/"
+
+# replace www from global
+cp -rf www/* "$FSDIR/www/"
+
+# copy the latest firmware of wifi
+cp -R etc/* "$FSDIR/etc/"
+
+# copy the latest firmware of wifi
+cp -R bin/* "$FSDIR/bin/"
+
+# replace luci from international firmware
+cp -R lua/* "$FSDIR/usr/lib/lua/"
 
 >&2 echo "repacking squashfs..."
 rm -f "$IMG.new"
