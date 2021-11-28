@@ -118,6 +118,9 @@ cp -R bin/* "$FSDIR/bin/"
 # replace luci from international firmware
 cp -R lua/* "$FSDIR/usr/lib/lua/"
 
+# replace luci from international firmware
+cp -R xiaoqiang/* "$FSDIR/usr/share/xiaoqiang/"
+
 >&2 echo "repacking squashfs..."
 rm -f "$IMG.new"
 mksquashfs "$FSDIR" "$IMG.new" -comp xz -b 256K -no-xattrs
