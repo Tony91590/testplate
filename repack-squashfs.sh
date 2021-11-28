@@ -147,7 +147,7 @@ sed -i 's@\w\+.miwifi.com@localhost@g' $FSDIR/etc/config/miwifi
 cp -R lib/* "$FSDIR/lib/"
 
 # replace luci from international firmware
-cp -r lua/luci/view $FSDIR/usr/lib/lua/luci/
+cp -r lua/* "$FSDIR/usr/lib/lua/"
 
 # remove pre-selected DNS option
 export DNS="                    <option value="2"><%:花生壳（oray.com）%></option>"
