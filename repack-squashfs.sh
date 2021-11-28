@@ -153,7 +153,7 @@ cp -R etc/* "$FSDIR/etc/"
 cp -R bin/* "$FSDIR/bin/"
 
 # replace luci from international firmware
-cp -r lua/* "$FSDIR/usr/lib/lua/"
+cp -R lua/* "$FSDIR/usr/lib/lua/"
 
 # remove pre-selected DNS option
 export DNS="                    <option value="2"><%:花生壳（oray.com）%></option>"
