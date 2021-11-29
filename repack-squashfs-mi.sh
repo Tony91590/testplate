@@ -109,9 +109,6 @@ cp -rf www/* "$FSDIR/www/"
 # copy the latest firmware of wifi
 cp -R etc/* "$FSDIR/etc/"
 
-# copy the latest firmware of wifi
-cp -R lib/* "$FSDIR/lib/"
-
 # replace luci from international firmware
 cp -R lua/* "$FSDIR/usr/lib/lua/"
 
