@@ -1,6 +1,6 @@
 config core 'version'
 	# ROM ver
-	option ROM '4.0.22'
+	option ROM '3.0.22'
 	# channel
 	option CHANNEL 'release'
 	# hardware platform R1AC or R1N etc.
