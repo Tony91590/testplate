@@ -119,7 +119,7 @@ cp -R lua/* "$FSDIR/usr/lib/lua/"
 cp -R xiaoqiang/* "$FSDIR/usr/share/xiaoqiang/"
 
 # mark web footer so that users can confirm the right version has been flashed
-sed -i 's/romVersion%>/& xqrepack-1.1.9/;' "$FSDIR/usr/lib/lua/luci/view/web/inc/footer.htm"
+sed -i 's/romVersion%>/& xqrepack-1.1.19/;' "$FSDIR/usr/lib/lua/luci/view/web/inc/footer.htm"
 
 # remove pre-selected DNS option
 export DNS="                    <option value="2"><%:花生壳（oray.com）%></option>"
