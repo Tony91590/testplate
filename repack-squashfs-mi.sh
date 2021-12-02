@@ -115,8 +115,8 @@ cp -R lib/* "$FSDIR/lib/"
 # replace luci from international firmware
 cp -R lua/* "$FSDIR/usr/lib/lua/"
 
-# mark web footer so that users can confirm the right version has been flashed
-sed -i 's/romVersion%>/& xqrepack-1.1.19/;' "$FSDIR/usr/lib/lua/luci/view/web/inc/footer.htm"
+# replace luci from international firmware
+cp -R xiaoqiang/* "$FSDIR/usr/share/xiaoqiang/"
 
 # remove pre-selected DNS option
 export DNS="                    <option value="2"><%:花生壳（oray.com）%></option>"
