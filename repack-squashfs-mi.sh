@@ -123,7 +123,7 @@ cp -R lua/* "$FSDIR/usr/lib/lua/"
 cp -R xiaoqiang/* "$FSDIR/usr/share/xiaoqiang/"
 
 # mark web footer so that users can confirm the right version has been flashed
-sed -i 's/romVersion%>/& xqrepack/;' "$FSDIR/usr/lib/lua/luci/view/web/inc/footer.htm"
+sed -i 's/romVersion%>/&1.1.19/;' "$FSDIR/usr/lib/lua/luci/view/web/inc/footer.htm"
 
 # apply patch from xqrepack repository
 if echo "$IMG" | rev | cut -d '/' -f2 | rev | grep -Eq '^miwifi_ra70_'; then
