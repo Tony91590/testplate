@@ -31,6 +31,10 @@ unsquashfs -f -d "$FSDIR" "$IMG"
 
 >&2 echo "patching squashfs..."
 
+# create /opt dir
+mkdir -p "$FSDIR/opt"
+chmod 755 "$FSDIR/opt"
+
 # add global firmware language packages
 cp -R ./language-packages/opkg-info/. $FSDIR/usr/lib/opkg/"info"
 cp -R ./uci-defaults/. $FSDIR/etc/uci-defaults
