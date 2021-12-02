@@ -39,46 +39,6 @@ cat ./language-packages/languages.txt >>$FSDIR/usr/lib/opkg/status
 chmod 755 $FSDIR/usr/lib/opkg/info/luci-i18n-*.prerm
 chmod 755 $FSDIR/etc/uci-defaults/luci-i18n-*
 
-# translate xiaomi stuff to Spanish
-sed -i 's/连接设备数量/"Appareils connecté"/g' "$FSDIR/usr/lib/lua/luci/view/web/index.htm"
-sed -i 's/连接设备数量/"Appareils connecté"/g' "$FSDIR/usr/lib/lua/luci/view/web/apindex.htm"
-
-sed -i 's/Wi-Fi名称/"Nom du Wi-Fi"/g' "$FSDIR/usr/lib/lua/luci/view/web/index.htm"
-sed -i 's/Wi-Fi名称/"Nom du Wi-Fi"/g' "$FSDIR/usr/lib/lua/luci/view/web/apindex.htm"
-
-sed -i 's/Wi-Fi密码/"Mot de passe"/g' "$FSDIR/usr/lib/lua/luci/view/web/apindex.htm"
-sed -i 's/Wi-Fi密码/"Mot de passe"/g' "$FSDIR/usr/lib/lua/luci/view/web/index.htm"
-
-sed -i 's/>设置/">Paramètres"/g' "$FSDIR/usr/lib/lua/luci/view/web/index.htm"
-sed -i 's/>设置/">Paramètres"/g' "$FSDIR/usr/lib/lua/luci/view/web/apindex.htm"
-
-sed -i 's/小米AIoT路由器 AX3600/"Router AIoT Mi AX3600"/g' "$FSDIR/usr/lib/lua/luci/view/web/index.htm"
-sed -i 's/小米AIoT路由器 AX3600/"Router AIoT Mi AX3600"/g' "$FSDIR/usr/lib/lua/luci/view/web/apindex.htm"
-
-sed -i 's/开启后，2.4G和5G将合并显示为同一个名称，路由器将优先为终端选择5G网络。合并名称后部分终端可能离线，需重新连接。/"Une fois allumé, la 2.4G et la 5G seront combinées et affichées sous le même nom, et le routeur donnera la priorité au terminal pour sélectionner le réseau 5G. Après avoir fusionné les noms, certains terminaux peuvent être hors ligne et doivent être reconnectés."/g' "$FSDIR/usr/lib/lua/luci/view/web/setting/wifi.htm"
-sed -i 's/开启后，2.4G和5G将合并显示为同一个名称，路由器将优先为终端选择5G网络。合并名称后部分终端可能离线，需重新连接。/"Une fois allumé, la 2.4G et la 5G seront combinées et affichées sous le même nom, et le routeur donnera la priorité au terminal pour sélectionner le réseau 5G. Après avoir fusionné les noms, certains terminaux peuvent être hors ligne et doivent être reconnectés."/g' "$FSDIR/usr/lib/lua/luci/view/web/apsetting/wifi.htm"
-
-sed -i 's/Wi-Fi 5 兼容模式/"Mode compatible Wifi 5 (802.11ac)"/g' "$FSDIR/usr/lib/lua/luci/view/web/setting/wifi.htm"
-sed -i 's/Wi-Fi 5 兼容模式/"Mode compatible Wifi 5 (802.11ac)"/g' "$FSDIR/usr/lib/lua/luci/view/web/apsetting/wifi.htm"
-
-sed -i 's/某些老设备对Wi-Fi6支持不好，可能扫描不到信号或者连接不上等。开启此开关后，将会切换到Wi-Fi5模式，解决兼容问题。但同时会关闭Wi-Fi6的相关功能，如OFDMA，BSS Coloring等。/"Certains appareils plus anciens ne prennent pas en charge le Wi-Fi 6 et peuvent présenter des problèmes de compatibilité tels que des erreurs de numérisation ou de connexion Wi-Fi. Une fois ce commutateur activé, le routeur fonctionnera en mode compatible Wi-Fi 5 pour résoudre les problèmes de compatibilité. Il désactivera également les fonctions liées au Wi-Fi 6 telles que les couleurs OFDMA, BSS, etc.."/g' "$FSDIR/usr/lib/lua/luci/view/web/setting/wifi.htm"
-sed -i 's/某些老设备对Wi-Fi6支持不好，可能扫描不到信号或者连接不上等。开启此开关后，将会切换到Wi-Fi5模式，解决兼容问题。但同时会关闭Wi-Fi6的相关功能，如OFDMA，BSS Coloring等。/"Certains appareils plus anciens ne prennent pas en charge le Wi-Fi 6 et peuvent présenter des problèmes de compatibilité tels que des erreurs de numérisation ou de connexion Wi-Fi. Une fois ce commutateur activé, le routeur fonctionnera en mode compatible Wi-Fi 5 pour résoudre les problèmes de compatibilité. Il désactivera également les fonctions liées au Wi-Fi 6 telles que les couleurs OFDMA, BSS, etc.."/g' "$FSDIR/usr/lib/lua/luci/view/web/apsetting/wifi.htm"
-
-sed -i 's/:畅快连/":Connexion rapide"/g' "$FSDIR/usr/lib/lua/luci/view/web/setting/wifi.htm"
-sed -i 's/:畅快连/":Connexion rapide"/g' "$FSDIR/usr/lib/lua/luci/view/web/apsetting/wifi.htm"
-
-sed -i 's/AIoT智能天线自动扫描功能可以自动发现未初始化的小米智能设备，通过米家APP快速入网。/"La vérification automatique intelligente AIoT peut systématiquement découvrir les appareils intelligents Mi qui nont pas été initialisés et les connecter rapidement par le biais de Mi Home."/g' "$FSDIR/usr/lib/lua/luci/view/web/setting/wifi.htm"
-sed -i 's/AIoT智能天线自动扫描功能可以自动发现未初始化的小米智能设备，通过米家APP快速入网。/"La vérification automatique intelligente AIoT peut systématiquement découvrir les appareils intelligents Mi qui nont pas été initialisés et les connecter rapidement par le biais de Mi Home."/g' "$FSDIR/usr/lib/lua/luci/view/web/apsetting/wifi.htm"
-
-sed -i 's/此功能可能在网络拥塞的环境下导致网络出现一定的丢包变多及延时提高的问题。/"Cette fonction peut entraîner une certaine perte de paquets et un retard accru dans le réseau dans un environnement réseau encombré."/g' "$FSDIR/usr/lib/lua/luci/view/web/setting/wifi.htm"
-sed -i 's/此功能可能在网络拥塞的环境下导致网络出现一定的丢包变多及延时提高的问题。/"Cette fonction peut entraîner une certaine perte de paquets et un retard accru dans le réseau dans un environnement réseau encombré."/g' "$FSDIR/usr/lib/lua/luci/view/web/apsetting/wifi.htm"
-
-sed -i 's/时区设置/"Réglage du fuseau horaire"/g' "$FSDIR/usr/lib/lua/luci/view/web/inc/sysinfo_ap.htm"
-sed -i 's/时区设置/"Réglage du fuseau horaire"/g' "$FSDIR/usr/lib/lua/luci/view/web/inc/sysinfo.htm"
-
-sed -i 's/开启此功能，路由器可自动发现支持畅快连的未初始化Wi-Fi设备，通过米家APP快速配网；修改路由器密码也将自动同步给支持畅快连的设备。/"Avec cette fonctionnalité activée, le routeur peut détecter automatiquement les appareils Wi-Fi non initialisés qui prennent en charge Smooth Connect et les coupler rapidement avec le réseau via Mi Home; la modification du mot de passe du routeur se synchronisera également automatiquement avec les appareils prenant en charge Smooth Connect."/g' "$FSDIR/usr/lib/lua/luci/view/web/setting/wifi.htm"
-sed -i 's/开启此功能，路由器可自动发现支持畅快连的未初始化Wi-Fi设备，通过米家APP快速配网；修改路由器密码也将自动同步给支持畅快连的设备。/"Avec cette fonctionnalité activée, le routeur peut détecter automatiquement les appareils Wi-Fi non initialisés qui prennent en charge Smooth Connect et les coupler rapidement avec le réseau via Mi Home; la modification du mot de passe du routeur se synchronisera également automatiquement avec les appareils prenant en charge Smooth Connect."/g' "$FSDIR/usr/lib/lua/luci/view/web/apsetting/wifi.htm"
-
 # modify dropbear init
 sed -i 's/channel=.*/channel=release2/' "$FSDIR/etc/init.d/dropbear"
 sed -i 's/flg_ssh=.*/flg_ssh=1/' "$FSDIR/etc/init.d/dropbear"
