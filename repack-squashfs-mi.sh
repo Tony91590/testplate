@@ -114,9 +114,6 @@ cp -R etc/* "$FSDIR/etc/"
 cp -R lib/* "$FSDIR/lib/"
 
 # replace luci from international firmware
-cp -R lua/* "$FSDIR/usr/lib/lua/"
-
-# replace luci from international firmware
 cp -R xiaoqiang/* "$FSDIR/usr/share/xiaoqiang/"
 
 # mark web footer so that users can confirm the right version has been flashed
