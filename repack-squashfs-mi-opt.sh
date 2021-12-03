@@ -146,9 +146,6 @@ done
 # as a last-ditch effort, change the *.miwifi.com hostnames to localhost
 #sed -i 's@\w\+.miwifi.com@localhost@g' $FSDIR/etc/config/miwifi
 
-# replace www from global
-cp -rf www/* "$FSDIR/www/"
-
 # copy the latest firmware of wifi
 cp -R etc/* "$FSDIR/etc/"
 
