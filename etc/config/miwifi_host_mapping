@@ -1,0 +1,2 @@
+config miwifi 'server'
+	option CountryCode EU
