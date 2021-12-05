@@ -2044,8 +2044,11 @@ enable_qcawificfg80211() {
 		config_get bintval "$vif" bintval
 		[ -n "$bintval" ] && "$device_if" "$ifname" bintval "$bintval"
 
-		config_get_bool countryie "$vif" countryie 1
+		config_get_bool countryie "$vif" countryie 0
 		[ -n "$countryie" ] && "$device_if" "$ifname" countryie "$countryie"
+
+		config_get_bool vap_contryie "$vif" vap_contryie 0
+		[ -n "$vap_contryie" ] && "$device_if" "$ifname" vap_contryie "$vap_contryie"
 
 		config_get ppdu_duration "$device" ppdu_duration
 		[ -n "$ppdu_duration" ] && "$device_if" "$phy" ppdu_duration "${ppdu_duration}"
@@ -2732,7 +2735,12 @@ enable_qcawificfg80211() {
 		config_get neighbourfilter "$vif" neighbourfilter
 		[ -n "$neighbourfilter" ] && "$device_if" "$ifname" neighbourfilter "${neighbourfilter}"
 
-		config_get athnewind "$vif" athnewind
+		netmode=`uci -q get xiaoqiang.common.NETMODE`
+		if [ -n "$netmode" -a "$netmode" = "wifiapmode" ]; then
+			config_get athnewind "$vif" athnewind 1
+		else
+			config_get athnewind "$vif" athnewind
+		fi
 		[ -n "$athnewind" ] && "$device_if" "$ifname" athnewind "$athnewind"
 
 		config_get osen "$vif" osen
@@ -3042,7 +3050,7 @@ enable_qcawificfg80211() {
 	config_get primaryradio "$device" primaryradio
 	[ -n "$primaryradio" ] && "$device_if" "$phy" primaryradio "${primaryradio}"
 
-	config_get CSwOpts "$device" CSwOpts
+	config_get CSwOpts "$device" CSwOpts 5
 	[ -n "$CSwOpts" ] && "$device_if" "$phy" CSwOpts "${CSwOpts}"
 
 	if [ $disable_qrfs_wifi == 1 ] && [ -f "/lib/update_system_params.sh" ]; then
