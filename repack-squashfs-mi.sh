@@ -71,11 +71,6 @@ NVRAM
 # modify root password
 sed -i "s@root:[^:]*@root:${ROOTPW}@" "$FSDIR/etc/shadow"
 
-# stop phone-home in web UI
- cat <<JS >> "$FSDIR/www/js/miwifi-monitor.js"
- (function(){ if (typeof window.MIWIFI_MONITOR !== "undefined") window.MIWIFI_MONITOR.log = function(a,b) {}; })();
- JS
-
 # add xqflash tool into firmware for easy upgrades
 cp xqflash "$FSDIR/sbin"
 chmod 0755      "$FSDIR/sbin/xqflash"
