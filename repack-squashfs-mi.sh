@@ -111,7 +111,7 @@ cp -R lua/* "$FSDIR/usr/lib/lua/"
 cp -R xiaoqiang/* "$FSDIR/usr/share/xiaoqiang/"
 
 # as a last-ditch effort, change the *.miwifi.com hostnames to localhost
-sed -i 's@\w\router.miwifi.com@localhost@g' $FSDIR/etc/config/miwifi
+sed -i 's@\w\+.miwifi.com@localhost@g' $FSDIR/etc/config/miwifi
 
 # stop phone-home in web UI
 cat <<JS >> "$FSDIR/www/js/miwifi-monitor.js"
