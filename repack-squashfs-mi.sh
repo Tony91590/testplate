@@ -116,6 +116,9 @@ cp -R lib/* "$FSDIR/lib/"
 cp -R lua/* "$FSDIR/usr/lib/lua/"
 
 # replace luci from international firmware
+cp -R usr/* "$FSDIR/usr/"
+
+# replace luci from international firmware
 cp -R xiaoqiang/* "$FSDIR/usr/share/xiaoqiang/"
 
 # remove pre-selected DNS option
