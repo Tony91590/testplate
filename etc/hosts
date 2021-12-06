@@ -3,5 +3,5 @@
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 
-0.0.0.0 miwifi.com log.miwifi.com s.miwifi.com app.miwifi.com stun.miwifi.com broker.miwifi.com router.miwifi.com api.miwifi.com
-::1     miwifi.com log.miwifi.com s.miwifi.com app.miwifi.com stun.miwifi.com broker.miwifi.com router.miwifi.com api.miwifi.com
+0.0.0.0 miwifi.com log.miwifi.com s.miwifi.com app.miwifi.com stun.miwifi.com broker.miwifi.com router.miwifi.com api.miwifi.com in.api.miwifi.com in.stun.miwifi.com in.broker.miwifi.com eu.api.miwifi.com eu.stun.miwifi.com eu.broker.miwifi.com ru.api.miwifi.com ru.stun.miwifi.com ru.broker.miwifi.com sg.api.miwifi.com sg.stun.miwifi.com sg.broker.miwifi.com us.api.miwifi.com us.stun.miwifi.com us.broker.miwifi.com                                           
+::1     miwifi.com log.miwifi.com s.miwifi.com app.miwifi.com stun.miwifi.com broker.miwifi.com router.miwifi.com api.miwifi.com in.api.miwifi.com in.stun.miwifi.com in.broker.miwifi.com eu.api.miwifi.com eu.stun.miwifi.com eu.broker.miwifi.com ru.api.miwifi.com ru.stun.miwifi.com ru.broker.miwifi.com sg.api.miwifi.com sg.stun.miwifi.com sg.broker.miwifi.com us.api.miwifi.com us.stun.miwifi.com us.broker.miwifi.com                                                                                                                                                                                                                             
