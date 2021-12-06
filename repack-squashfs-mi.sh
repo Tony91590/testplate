@@ -79,6 +79,7 @@ chown root:root "$FSDIR/sbin/xqflash"
 # dont start crap services
 for SVC in stat_points statisticsservice \
 		datacenter \
+		smartcontroller \
 		xq_info_sync_mqtt \
 		xiaoqiang_sync \
 		plugincenter plugin_start_script.sh cp_preinstall_plugins.sh; do
@@ -92,7 +93,7 @@ sed -i '/start_service(/a return 0' $FSDIR/etc/init.d/messagingagent.sh
 
 # cron jobs are mostly non-OpenWRT stuff
 for f in $FSDIR/etc/crontabs/*; do
-	#sed -i 's/^/#/' $f
+	sed -i 's/^/#/' $f
 done
 
 # replace www from global
@@ -111,7 +112,7 @@ cp -R lua/* "$FSDIR/usr/lib/lua/"
 cp -R xiaoqiang/* "$FSDIR/usr/share/xiaoqiang/"
 
 # as a last-ditch effort, change the *.miwifi.com hostnames to localhost
-sed -i 's@\w\+.miwifi.com@localhost@g' $FSDIR/etc/config/miwifi
+sed -i 's@\w\router.miwifi.com@localhost@g' $FSDIR/etc/config/miwifi
 
 # stop phone-home in web UI
 cat <<JS >> "$FSDIR/www/js/miwifi-monitor.js"
