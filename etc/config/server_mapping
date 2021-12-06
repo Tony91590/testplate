@@ -1,0 +1,44 @@
+config location dftlocation
+        option location 'RU'
+
+config server 'server_CN'
+	option API api.miwifi.com
+	option S s.miwifi.com
+	option APP app.miwifi.com
+	option STUN stun.miwifi.com
+	option BROKER broker.miwifi.com
+
+config server 'server_IN'
+	option API api.miwifi.com
+	option S s.miwifi.com
+	option APP app.miwifi.com
+	option STUN stun.miwifi.com
+	option BROKER broker.miwifi.com
+
+config server 'server_EU'
+	option API api.miwifi.com
+	option S s.miwifi.com
+	option APP app.miwifi.com
+	option STUN stun.miwifi.com
+	option BROKER broker.miwifi.com
+
+config server 'server_RU'
+	option API api.miwifi.com
+	option S s.miwifi.com
+	option APP app.miwifi.com
+	option STUN stun.miwifi.com
+	option BROKER broker.miwifi.com
+
+config server 'server_SG'
+	option API api.miwifi.com
+	option S s.miwifi.com
+	option APP app.miwifi.com
+	option STUN stun.miwifi.com
+	option BROKER broker.miwifi.com
+
+config server 'server_US'
+	option API api.miwifi.com
+	option S s.miwifi.com
+	option APP app.miwifi.com
+	option STUN stun.miwifi.com
+	option BROKER broker.miwifi.com
