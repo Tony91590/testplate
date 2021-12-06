@@ -121,6 +121,9 @@ cat <<JS >> "$FSDIR/www/js/miwifi-monitor.js"
 (function(){ if (typeof window.MIWIFI_MONITOR !== "undefined") window.MIWIFI_MONITOR.log = function(a,b) {}; })();
 JS
 
+# mark web footer so that users can confirm the right version has been flashed
+sed -i 's/romVersion%>/& xqrepack/;' "$FSDIR/usr/lib/lua/luci/view/web/inc/footer.htm"
+
 # apply patch from xqrepack repository
 if echo "$IMG" | rev | cut -d '/' -f2 | rev | grep -Eq '^miwifi_ra70_'; then
     (cd "$FSDIR" && patch -p1 --no-backup-if-mismatch) < 0001-Add-TX-power-in-dBm-options-in-web-interface-ra70.patch
