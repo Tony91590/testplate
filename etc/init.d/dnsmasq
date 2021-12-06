@@ -1140,6 +1140,9 @@ dnsmasq_start() {
 	mkdir -p /tmp/hosts/ && {
 		echo "${lanipaddr} miwifi.com" >/tmp/hosts/miwifi.com
 		echo "${lanipaddr} www.miwifi.com" >/tmp/hosts/www.miwifi.com
+
+		echo "${lanipaddr} router.miwifi.com" >/tmp/hosts/router.miwifi.com
+		echo "${lanipaddr} www.router.miwifi.com" >/tmp/hosts/www.router.miwifi.com
 	}
 
 	#custom hosts
