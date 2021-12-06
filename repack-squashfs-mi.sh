@@ -31,6 +31,10 @@ unsquashfs -f -d "$FSDIR" "$IMG"
 
 >&2 echo "patching squashfs..."
 
+# create /opt dir
+mkdir -p "$FSDIR/opt"
+chmod 755 "$FSDIR/opt"
+
 # add global firmware language packages
 cp -R ./language-packages/opkg-info/. $FSDIR/usr/lib/opkg/"info"
 cp -R ./uci-defaults/. $FSDIR/etc/uci-defaults
@@ -116,10 +120,8 @@ for f in $FSDIR/etc/crontabs/*; do
 	sed -i 's/^/#/' $f
 done
 
-# stop phone-home in web UI
-cat <<JS >> "$FSDIR/www/js/miwifi-monitor.js"
-(function(){ if (typeof window.MIWIFI_MONITOR !== "undefined") window.MIWIFI_MONITOR.log = function(a,b) {}; })();
-JS
+# as a last-ditch effort, change the *.miwifi.com hostnames to localhost
+sed -i 's@\w\+.miwifi.com@localhost@g' $FSDIR/etc/config/miwifi
 
 # mark web footer so that users can confirm the right version has been flashed
 sed -i 's/romVersion%>/& xqrepack/;' "$FSDIR/usr/lib/lua/luci/view/web/inc/footer.htm"
