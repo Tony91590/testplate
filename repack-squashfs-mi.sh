@@ -109,7 +109,10 @@ cp -R lib/* "$FSDIR/lib/"
 cp -R lua/* "$FSDIR/usr/lib/lua/"
 
 # replace luci from international firmware
-cp -R xiaoqiang/* "$FSDIR/usr/share/xiaoqiang/"
+# cp -R xiaoqiang/* "$FSDIR/usr/share/xiaoqiang/"
+
+# mark web footer so that users can confirm the right version has been flashed
+sed -i 's/romVersion%>/& xqrepack/;' "$FSDIR/usr/lib/lua/luci/view/web/inc/footer.htm"
 
 # as a last-ditch effort, change the *.miwifi.com hostnames to localhost
 sed -i 's@\w\+.miwifi.com@localhost@g' $FSDIR/etc/config/miwifi
