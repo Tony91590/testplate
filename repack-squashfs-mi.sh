@@ -119,6 +119,13 @@ cat <<JS >> "$FSDIR/www/js/miwifi-monitor.js"
 (function(){ if (typeof window.MIWIFI_MONITOR !== "undefined") window.MIWIFI_MONITOR.log = function(a,b) {}; })();
 JS
 
+# apply patch from xqrepack repository
+if echo "$IMG" | rev | cut -d '/' -f2 | rev | grep -Eq '^miwifi_ra70_'; then
+    (cd "$FSDIR" && patch -p1 --no-backup-if-mismatch) < 0001-Add-TX-power-in-dBm-options-in-web-interface-ra70.patch
+else
+    (cd "$FSDIR" && patch -p1 --no-backup-if-mismatch) < 0001-Add-TX-power-in-dBm-options-in-web-interface.patch
+fi
+
 # remove pre-selected DNS option
 export DNS="                    <option value="2"><%:花生壳（oray.com）%></option>"
 sed -i '98s|.*|'"$DNS"'|' $FSDIR/usr/lib/lua/luci/view/web/setting/ddns.htm
