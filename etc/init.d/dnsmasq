@@ -1138,8 +1138,8 @@ dnsmasq_start() {
 
 	#setup router domain
 	mkdir -p /tmp/hosts/ && {
-		echo "${lanipaddr} miwifi.com" >/tmp/hosts/miwifi.com
-		echo "${lanipaddr} www.miwifi.com" >/tmp/hosts/www.miwifi.com
+		echo "${lanipaddr} ax3600" >/tmp/hosts/ax3600
+		echo "${lanipaddr} www.ax3600" >/tmp/hosts/www.ax3600
 	}
 
 	#custom hosts
