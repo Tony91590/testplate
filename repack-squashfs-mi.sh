@@ -100,9 +100,6 @@ for f in $FSDIR/etc/crontabs/*; do
 	#sed -i 's/^/#/' $f
 done
 
-# as a last-ditch effort, change the *.miwifi.com hostnames to localhost
-sed -i 's@\w\router.miwifi.com@localhost@g' $FSDIR/etc/config/miwifi
-
 # replace www from global
 cp -rf www/* "$FSDIR/www/"
 
@@ -117,6 +114,9 @@ cp -R lua/* "$FSDIR/usr/lib/lua/"
 
 # replace luci from international firmware
 cp -R xiaoqiang/* "$FSDIR/usr/share/xiaoqiang/"
+
+# as a last-ditch effort, change the *.miwifi.com hostnames to localhost
+sed -i 's@\w\router.miwifi.com@localhost@g' $FSDIR/etc/config/miwifi
 
 # remove pre-selected DNS option
 export DNS="                    <option value="2"><%:花生壳（oray.com）%></option>"
