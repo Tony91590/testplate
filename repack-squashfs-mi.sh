@@ -113,6 +113,11 @@ cp -R xiaoqiang/* "$FSDIR/usr/share/xiaoqiang/"
 # as a last-ditch effort, change the *.miwifi.com hostnames to localhost
 sed -i 's@\w\router.miwifi.com@localhost@g' $FSDIR/etc/config/miwifi
 
+# stop phone-home in web UI
+cat <<JS >> "$FSDIR/www/js/miwifi-monitor.js"
+(function(){ if (typeof window.MIWIFI_MONITOR !== "undefined") window.MIWIFI_MONITOR.log = function(a,b) {}; })();
+JS
+
 # remove pre-selected DNS option
 export DNS="                    <option value="2"><%:花生壳（oray.com）%></option>"
 sed -i '98s|.*|'"$DNS"'|' $FSDIR/usr/lib/lua/luci/view/web/setting/ddns.htm
