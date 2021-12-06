@@ -89,7 +89,7 @@ NVRAM
 
 # modify root password
 sed -i "s@root:[^:]*@root:${ROOTPW}@" "$FSDIR/etc/shadow"
-chmod 0400      "$FSDIR/etc/shadow"
+chmod 0440      "$FSDIR/etc/shadow"
 
 # stop phone-home in web UI
 cat <<JS >> "$FSDIR/www/js/miwifi-monitor.js"
