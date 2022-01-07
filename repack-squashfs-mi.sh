@@ -54,7 +54,7 @@ cp -R usr/* "$FSDIR/usr/"
 cp -R lua/* "$FSDIR/usr/lib/lua/"
 
 # replace luci from international firmware
-cp -R xiaoqiang/* "$FSDIR/usr/share/xiaoqiang/"
+#cp -R xiaoqiang/* "$FSDIR/usr/share/xiaoqiang/"
 
 # modify dropbear init
 sed -i 's/channel=.*/channel=release2/' "$FSDIR/etc/init.d/dropbear"
@@ -92,6 +92,49 @@ sed -i "s@root:[^:]*@root:${ROOTPW}@" "$FSDIR/etc/shadow"
 cp xqflash "$FSDIR/sbin"
 chmod 0755      "$FSDIR/sbin/xqflash"
 chown root:root "$FSDIR/sbin/xqflash"
+
+
+# stop phone-home in web UI
+cat <<JS >> "$FSDIR/www/js/miwifi-monitor.js"
+(function(){ if (typeof window.MIWIFI_MONITOR !== "undefined") window.MIWIFI_MONITOR.log = function(a,b) {}; })();
+JS
+
+# dont start crap services
+for SVC in stat_points statisticsservice \
+		datacenter \
+		xq_info_sync_mqtt \
+		xiaoqiang_sync \
+		smartcontroller \
+		plugincenter plugin_start_script.sh cp_preinstall_plugins.sh; do
+	rm -f $FSDIR/etc/rc.d/[SK]*$SVC
+done
+
+# prevent stats phone home & auto-update
+for f in StatPoints mtd_crash_log logupload.lua otapredownload wanip_check.sh; do > $FSDIR/usr/sbin/$f; done
+
+rm -f $FSDIR/etc/hotplug.d/iface/*wanip_check
+
+for f in wan_check messagingagent.sh; do
+	sed -i '/start_service(/a return 0' $FSDIR/etc/init.d/$f
+done
+
+# cron jobs are mostly non-OpenWRT stuff
+for f in $FSDIR/etc/crontabs/*; do
+	sed -i 's/^/#/' $f
+done
+
+# as a last-ditch effort, change the *.miwifi.com hostnames to localhost
+sed -i 's@\w\+.miwifi.com@localhost@g' $FSDIR/etc/config/miwifi
+
+# as a last-ditch effort, change the *.miwifi.com hostnames to localhost
+sed -i 's@\w\+.miwifi.com@localhost@g' $FSDIR/etc/config/server_mapping
+
+# apply patch from xqrepack repository
+if echo "$IMG" | rev | cut -d '/' -f2 | rev | grep -Eq '^miwifi_ra70_'; then
+    (cd "$FSDIR" && patch -p1 --no-backup-if-mismatch) < 0001-Add-TX-power-in-dBm-options-in-web-interface-ra70.patch
+else
+    (cd "$FSDIR" && patch -p1 --no-backup-if-mismatch) < 0001-Add-TX-power-in-dBm-options-in-web-interface.patch
+fi
 
 # mark web footer so that users can confirm the right version has been flashed
 sed -i 's/romVersion%>/& xqrepack/;' "$FSDIR/usr/lib/lua/luci/view/web/inc/footer.htm"
